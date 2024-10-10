@@ -8,7 +8,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { ListagemMoedasComponent } from './listagem-moedas/listagem-moedas.component';
 import { ConversaoMoedasComponent } from './conversao-moedas/conversao-moedas.component';
 import { HistoricoConversoesComponent } from './historico-conversoes/historico-conversoes.component';
-
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +21,8 @@ import { HistoricoConversoesComponent } from './historico-conversoes/historico-c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
