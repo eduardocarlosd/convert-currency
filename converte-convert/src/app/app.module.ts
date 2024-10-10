@@ -8,7 +8,12 @@ import { InicioComponent } from './inicio/inicio.component';
 import { ListagemMoedasComponent } from './listagem-moedas/listagem-moedas.component';
 import { ConversaoMoedasComponent } from './conversao-moedas/conversao-moedas.component';
 import { HistoricoConversoesComponent } from './historico-conversoes/historico-conversoes.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +27,12 @@ import {MatTableModule} from '@angular/material/table';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    
+  
+
   ],
   providers: [],
   bootstrap: [AppComponent]
