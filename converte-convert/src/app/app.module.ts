@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrincipalComponent } from './principal/principal.component';
-import { ConverterComponent } from './converter/converter.component';
+
 import { InicioComponent } from './inicio/inicio.component';
 import { ListagemMoedasComponent } from './listagem-moedas/listagem-moedas.component';
 import { ConversaoMoedasComponent } from './conversao-moedas/conversao-moedas.component';
@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
   declarations: [
     AppComponent,
     PrincipalComponent,
-    ConverterComponent,
+
     InicioComponent,
     ListagemMoedasComponent,
     ConversaoMoedasComponent,
