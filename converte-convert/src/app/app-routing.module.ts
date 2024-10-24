@@ -4,8 +4,9 @@ import { PrincipalComponent } from './principal/principal.component';
 
 import { InicioComponent } from './inicio/inicio.component';
 import { ListagemMoedasComponent } from './listagem-moedas/listagem-moedas.component';
-import { ConversaoMoedasComponent } from './conversao-moedas/conversao-moedas.component';
+
 import { HistoricoConversoesComponent } from './historico-conversoes/historico-conversoes.component';
+import { ConversaoMoedasComponent } from './conversao-moedas/conversao-moedas.component';
 
 
 

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ListagemMoedasComponent } from './listagem-moedas/listagem-moedas.component';
-import { ConversaoMoedasComponent } from './conversao-moedas/conversao-moedas.component';
+
 import { HistoricoConversoesComponent } from './historico-conversoes/historico-conversoes.component';
 
 import { MatTableModule } from '@angular/material/table';
@@ -17,12 +17,22 @@ import { MatCardModule } from '@angular/material/card';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
+
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ConversaoMoedasComponent } from './conversao-moedas/conversao-moedas.component';
+
+
+import { MatButtonModule } from '@angular/material/button';
+
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 
@@ -33,6 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     PrincipalComponent,
+    ConversaoMoedasComponent,
 
     InicioComponent,
     ListagemMoedasComponent,
@@ -49,8 +60,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSelectModule, 
     MatCardModule,
     ReactiveFormsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    FormsModule
     ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync(),
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
