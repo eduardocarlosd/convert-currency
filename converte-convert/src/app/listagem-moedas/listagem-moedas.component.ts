@@ -58,11 +58,13 @@
 // }
 
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServiceService } from '../service/service.service';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
  
-// Importe o modelo de Moeda caso tenha criado
+
 export interface Moeda {
   posicao: number;
   codigo: string;
@@ -73,11 +75,15 @@ export interface Moeda {
   templateUrl: './listagem-moedas.component.html',
   styleUrls: ['./listagem-moedas.component.scss']
 })
-export class ListagemMoedasComponent implements OnInit {
+export class ListagemMoedasComponent implements AfterViewInit {
   
   displayedColumns: string[] = ['posicao', 'codigo', 'descricao'];
-  dataSource = new MatTableDataSource<Moeda>([]);
-  isLoading = true;
+  moedas: Moeda[] = [];
+  dataSource: MatTableDataSource<Moeda> = new MatTableDataSource<Moeda>();
+  // dataSource = new MatTableDataSource<Moeda>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  // isLoading = true;
 
   @ViewChild('input') input: any;
   // constructor(
@@ -89,30 +95,38 @@ export class ListagemMoedasComponent implements OnInit {
     private service: ServiceService,
     // private _snackBar: MatSnackBar
    ) { }
-
-
-  // Método executado quando o componente é inicializado
-  ngOnInit(): void {
-    this.fetchMoedas();
+  ngAfterViewInit(): void {
+     this.fetchMoedas();
   }
 
-  // Método para buscar moedas da API
+  
   fetchMoedas(): void {
-    this.service.service.getMoedas().subscribe({
-      next: (moedas: Moeda[]) => {
-        this.dataSource.data = moedas;
-        this.isLoading = false;
+    this.service.listarMoedas().subscribe({
+      next: (res) => {
+        this.moedas = res.supported_codes.map((item, index) => ({
+          posicao: index + 1, // para começar a contagem de 1
+          codigo: item[0],
+          descricao: item[1],
+      }));
+
+        this.dataSource = new MatTableDataSource( this.moedas);
+        console.log(res)
+        // this.isLoading = false;
       },
       error: () => {
         console.error('Erro ao carregar moedas:', Error);
-        this.isLoading = false;
+        // this.isLoading = false;
       }
     });
   }
 
-  // Método de filtragem da tabela
+ 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
+
+
+
+

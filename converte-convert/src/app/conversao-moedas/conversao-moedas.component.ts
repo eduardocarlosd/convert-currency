@@ -29,7 +29,7 @@ import { ServiceService } from "../service/service.service";
   styleUrl: './conversao-moedas.component.scss'
 })
 export class ConversaoMoedasComponent implements OnInit {
-  moedas: string[][] = []; // Array para armazenar as moedas
+  moedas: string[][] = []; 
   moedaOrigem: string = '';
   moedaDestino: string = '';
   valor: number = 0;
@@ -67,10 +67,9 @@ export class ConversaoMoedasComponent implements OnInit {
       return;
     }
 
-    // Aqui você implementaria a chamada para converter as moedas
     this.service.obterTaxaCambio(this.moedaOrigem).subscribe({
       next: (response: { conversion_rates: { [x: string]: any; }; }) => {
-        // Calcula a conversão baseado na taxa retornada
+    
         const taxa = response.conversion_rates[this.moedaDestino];
         this.resultado = this.valor * taxa;
       },

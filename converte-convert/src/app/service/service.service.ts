@@ -29,6 +29,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { Moeda } from '../listagem-moedas/listagem-moedas.component';
 
 
 export interface ICurrencyResponse {
@@ -56,15 +57,15 @@ export class ServiceService {
     };
   }
 
-  // Método para listar todas as moedas disponíveis
+ 
   listarMoedas(): Observable<ICurrencyResponse> {
     const url = `${environment.api_url}/${environment.apiKey}/codes`;
     return this.http.get<ICurrencyResponse>(url, this.getHeaders());
   }
 
-  // Método opcional para obter taxa de câmbio específica
+
   obterTaxaCambio(moedaBase: string): Observable<any> {
-    const url = `${environment.api_url+"language=pt-BR"}/${environment.apiKey}/latest/${moedaBase}`;
+    const url = `${environment.api_url}/${environment.apiKey}/latest/${moedaBase}`;
     return this.http.get(url, this.getHeaders());
   }
 }
