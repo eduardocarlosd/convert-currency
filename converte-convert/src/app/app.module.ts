@@ -33,6 +33,11 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ServiceService } from './service/service.service';
+
+
+
+
 
 
 
@@ -44,9 +49,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AppComponent,
     PrincipalComponent,
     ConversaoMoedasComponent,
-
-    InicioComponent,
     ListagemMoedasComponent,
+    InicioComponent,
+
     ConversaoMoedasComponent,
     HistoricoConversoesComponent
   ],
@@ -63,11 +68,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatToolbarModule,
     MatButtonModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
     ],
+
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+   
+    
   ],
   bootstrap: [AppComponent]
 })

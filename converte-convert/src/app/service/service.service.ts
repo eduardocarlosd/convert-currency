@@ -42,7 +42,11 @@ export interface ICurrencyResponse {
   providedIn: 'root'
 })
 export class ServiceService {
+  service: any;
   constructor(private http: HttpClient) { }
+  private apiUrl = 'https://v6.exchangerate-api.com/v6/';
+
+  
 
   getHeaders() {
     return {
@@ -60,7 +64,8 @@ export class ServiceService {
 
   // Método opcional para obter taxa de câmbio específica
   obterTaxaCambio(moedaBase: string): Observable<any> {
-    const url = `${environment.api_url}/${environment.apiKey}/latest/${moedaBase}`;
+    const url = `${environment.api_url+"language=pt-BR"}/${environment.apiKey}/latest/${moedaBase}`;
     return this.http.get(url, this.getHeaders());
   }
 }
+
