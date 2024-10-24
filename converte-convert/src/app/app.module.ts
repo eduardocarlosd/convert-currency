@@ -19,6 +19,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,18 +41,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule, 
     MatCardModule,
-    ReactiveFormsModule
-    
-    
-  
-
-  ],
+    ReactiveFormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
