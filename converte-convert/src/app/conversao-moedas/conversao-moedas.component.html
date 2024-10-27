@@ -35,6 +35,21 @@
 
  -->
 
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+ esse é o certo
+
 <div class="converter-container">
   <mat-form-field>
     <mat-label>Moeda Origem</mat-label>
@@ -65,5 +80,47 @@
 
   <mat-toolbar *ngIf="resultado">
     <span>{{valor}} {{moedaOrigem}} = {{resultado | number:'1.2-2'}} {{moedaDestino}}</span>
+  </mat-toolbar>
+</div> -->
+
+
+
+
+
+<div class="converter-container">
+  <!-- Seleção da Moeda de Origem -->
+  <mat-form-field appearance="fill">
+    <mat-label>Moeda Origem</mat-label>
+    <mat-select [(ngModel)]="moedaOrigem">
+      <mat-option *ngFor="let moeda of moedas" [value]="moeda[0]">
+        {{ moeda[0] }} - {{ moeda[1] }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Seleção da Moeda de Destino -->
+  <mat-form-field appearance="fill">
+    <mat-label>Moeda Destino</mat-label>
+    <mat-select [(ngModel)]="moedaDestino">
+      <mat-option *ngFor="let moeda of moedas" [value]="moeda[0]">
+        {{ moeda[0] }} - {{ moeda[1] }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Campo de Entrada para o Valor -->
+  <mat-form-field appearance="fill">
+    <mat-label>Valor</mat-label>
+    <input matInput type="number" [(ngModel)]="valor" />
+  </mat-form-field>
+
+  <!-- Botão para Calcular Conversão -->
+  <button mat-stroked-button color="primary" (click)="calcularConversao()">
+    Calcular Conversão
+  </button>
+
+  <!-- Exibição do Resultado -->
+  <mat-toolbar *ngIf="resultado" color="primary" class="mt-4">
+    <span>{{ valor }} {{ moedaOrigem }} = {{ resultado | number:'1.2-2' }} {{ moedaDestino }}</span>
   </mat-toolbar>
 </div>

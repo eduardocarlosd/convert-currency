@@ -17,16 +17,40 @@
   
 
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ServiceService } from "../service/service.service";
 
-
+interface HistoricoConversao {
+  moedaOrigem: string;
+  moedaDestino: string;
+  valorOriginal: number;
+  valorConvertido: number;
+  data: Date;
+}
 
 @Component({
   selector: 'app-conversao-moedas',
   templateUrl: './conversao-moedas.component.html',
-  styleUrl: './conversao-moedas.component.scss'
+  styleUrls: ['./conversao-moedas.component.scss']
 })
 export class ConversaoMoedasComponent implements OnInit {
   moedas: string[][] = []; 
@@ -34,6 +58,7 @@ export class ConversaoMoedasComponent implements OnInit {
   moedaDestino: string = '';
   valor: number = 0;
   resultado: number = 0;
+  historicoConversoes: HistoricoConversao[] = [];
 
   constructor(
     private service: ServiceService,
@@ -42,21 +67,31 @@ export class ConversaoMoedasComponent implements OnInit {
 
   ngOnInit() {
     this.carregarMoedas();
+    this.carregarHistorico();
   }
 
   carregarMoedas() {
     this.service.listarMoedas().subscribe({
       next: (response: { supported_codes: string[][]; }) => {
         this.moedas = response.supported_codes;
-        console.log('Moedas carregadas:', this.moedas);
       },
       error: (erro: any) => {
-        console.error('Erro ao carregar moedas:', erro);
         this._snackBar.open('Erro ao carregar moedas', 'Fechar', {
           duration: 3000
         });
       }
     });
+  }
+
+  carregarHistorico() {
+    const historicoSalvo = localStorage.getItem('historicoConversoes');
+    if (historicoSalvo) {
+      this.historicoConversoes = JSON.parse(historicoSalvo);
+    }
+  }
+
+  salvarHistorico() {
+    localStorage.setItem('historicoConversoes', JSON.stringify(this.historicoConversoes));
   }
 
   calcularConversao() {
@@ -69,12 +104,21 @@ export class ConversaoMoedasComponent implements OnInit {
 
     this.service.obterTaxaCambio(this.moedaOrigem).subscribe({
       next: (response: { conversion_rates: { [x: string]: any; }; }) => {
-    
         const taxa = response.conversion_rates[this.moedaDestino];
         this.resultado = this.valor * taxa;
+
+        const novaConversao: HistoricoConversao = {
+          moedaOrigem: this.moedaOrigem,
+          moedaDestino: this.moedaDestino,
+          valorOriginal: this.valor,
+          valorConvertido: this.resultado,
+          data: new Date()
+        };
+
+        this.historicoConversoes.push(novaConversao);
+        this.salvarHistorico(); // Salvar no localStorage
       },
       error: (erro: any) => {
-        console.error('Erro na conversão:', erro);
         this._snackBar.open('Erro ao converter moedas', 'Fechar', {
           duration: 3000
         });
@@ -82,4 +126,3 @@ export class ConversaoMoedasComponent implements OnInit {
     });
   }
 }
-

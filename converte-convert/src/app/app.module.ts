@@ -34,6 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ServiceService } from './service/service.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -70,6 +71,13 @@ import { ServiceService } from './service/service.service';
     MatSnackBarModule,
     FormsModule,
     HttpClientModule,
+
+
+  
+   MatIconModule
+ 
+
+    
     ],
 
   providers: [
