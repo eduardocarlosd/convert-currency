@@ -1,40 +1,3 @@
-// import { Component, inject } from '@angular/core';
-// import { MatSnackBar } from '@angular/material/snack-bar';
-
-// @Component({
-//   selector: 'app-conversao-moedas',
-//   templateUrl: './conversao-moedas.component.html',
-//   styleUrl: './conversao-moedas.component.scss'
-// })
-// export class ConversaoMoedasComponent {
-//   private _snackBar = inject(MatSnackBar);
-// message: any;
-// action: any;
-
-//   openSnackBar(message: string, action: string) {
-//     this._snackBar.open(message, action);
-//   }
-  
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ServiceService } from "../service/service.service";
@@ -53,7 +16,7 @@ interface HistoricoConversao {
   styleUrls: ['./conversao-moedas.component.scss']
 })
 export class ConversaoMoedasComponent implements OnInit {
-  moedas: string[][] = []; 
+  moedas: string[][] = [];
   moedaOrigem: string = '';
   moedaDestino: string = '';
   valor: number = 0;
@@ -116,7 +79,7 @@ export class ConversaoMoedasComponent implements OnInit {
         };
 
         this.historicoConversoes.push(novaConversao);
-        this.salvarHistorico(); // Salvar no localStorage
+        this.salvarHistorico();
       },
       error: (erro: any) => {
         this._snackBar.open('Erro ao converter moedas', 'Fechar', {
